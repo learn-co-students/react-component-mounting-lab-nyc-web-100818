@@ -8,26 +8,14 @@ class Timer extends Component {
   }
 
   // add your code here
+  componentDidMount() {
+    this.interval = setInterval(() => {
+      this.clockTick()
+    }, 1000)
+  }
 
-
-
-
-
-
-
-  render() {
-
-    const { time, color, className } = this.state
-    return (
-      <section className="Timer" style={{background: color}}>
-
-        <h1>{ time }</h1>
-        <button onClick={ this.stopClock }>Stop</button>
-        <aside className="mountText">Mounted</aside>
-        <small onClick={ this.handleClose }>X</small>
-
-      </section>
-    );
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
 
   //clock functions
@@ -46,6 +34,20 @@ class Timer extends Component {
     this.props.removeTimer(this.props.id)
   }
 
+
+  render() {
+    const { time, color, className } = this.state
+    return (
+      <section className="Timer" style={{background: color}}>
+
+        <h1>{ time }</h1>
+        <button onClick={ this.stopClock }>Stop</button>
+        <aside className="mountText">Mounted</aside>
+        <small onClick={ this.handleClose }>X</small>
+
+      </section>
+    );
+  }
 
 }
 
